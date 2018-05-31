@@ -40,6 +40,45 @@ app.use('/', express.static('examples'));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
+app.get('/getSurvey', function(request, response) {
+    db.collection('surveys').find().toArray((err, surveys) => {
+        if (err) return console.log(err);
+        response.setHeader('Content-Type', 'application/json');
+        response.send(surveys);
+    })
+});
+
+app.post('/addSurvey', function(req, res){
+    req.body._id = null;
+    var survey = req.body;
+    db.collection('surveys').insert(survey, function(err, data){
+        if(err) return console.log(err);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(survey);
+    })
+});
+
+app.put('/survey/:survey_id', function(req, res){    
+    db.collection('surveys').findAndModify(
+       {_id: new MongoId(req.params.survey_id)}, // query
+       [['_id','asc']],  // sort order
+       {$set : {survey_question: req.body.survey_question, survey_answer1: req.body.survey_answer1, survey_answer2: req.body.survey_answer2, 
+           survey_answer3: req.body.survey_answer3, survey_category: req.body.survey_category}}, // replacement, replaces only the field "hi"
+       function(err, doc) {
+           if (err){
+               console.warn(err.message);  // returns error if no matching object found
+           }else{
+               res.json(doc);
+           }
+       });
+});
+
+app.delete('/survey/:survey_id', function(req, res){
+    db.collection('surveys').remove({_id: new MongoId(req.params.survey_id)},
+    function(err, data){
+        res.json(data);
+    });
+});
 
 MongoClient.connect('mongodb://localhost:27017/mysurvey', (err, database) => {
   if (err) return console.log(err)

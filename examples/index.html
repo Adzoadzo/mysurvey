@@ -34,30 +34,30 @@
 <script src="assets/js/xeditable.min.js"></script>
 <script src="assets/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
 
+<script src="controllers/surveys-controller.js"></script>
+
 <script>
     var app = angular.module("mysurvey-app", ["ngRoute", "xeditable", "ui.bootstrap"]);
 
-    app.controller('dashboardController', DashboardController);
+    app.controller('surveysController', SurveysController);
 
     app.config(function($routeProvider) {
         $routeProvider
         .when("/", {
-            templateUrl : "views/dashboard.html",
-            controller : "dashboardController"
+            templateUrl : "views/surveys.html",
+            controller : "surveysController"
         })
-        .when("/dashboard", {
-            templateUrl : "views/dashboard.html",
-            controller : "dashboardController"
+        .when("/surveys", {
+            templateUrl : "views/surveys.html",
+            controller : "surveysController"
         })
-        .when("/user", {
-            templateUrl : "views/user.html",
-            controller : "userController"
+        .when("/addSurvey", {
+            templateUrl : "views/addSurvey.html",
+            controller : "surveysController"
         })
         .when("/table", {
             templateUrl : "views/table.html",
-            controller : "tableController"
-        }).when("/providers", {
-            templateUrl : "views/providers.html"
+            controller : "surveysController"
         });
     });
 </script>

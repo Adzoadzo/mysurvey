@@ -1,0 +1,19 @@
+<div class="surveys">
+    <div class="row">
+            <div ng-repeat="survey in surveys_list" class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            {{survey.survey_question}}
+                        </div>
+                        <div class="panel-body">
+                            <p>{{survey.survey_answer1}}</p>
+                            <p>{{survey.survey_answer2}}</p>
+                            <p>{{survey.survey_answer3}}</p>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal1">Vote</button>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
