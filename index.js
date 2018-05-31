@@ -12,6 +12,26 @@ app.use('/', express.static('examples'));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
+app.use('/mysurvey/rest/',function(request,response,next){
+    jwt.verify(request.get('JWT'), jwt_secret, function(error, decoded) {      
+      if (error) {
+        response.status(401).send('Unauthorized access');    
+      } else {
+        db.collection("users").findOne({'_id': new MongoId(decoded._id)}, function(error, user) {
+          if (error){
+            throw error;
+          }else{
+            if(user){
+              next();
+            }else{
+              response.status(401).send('Credentials are wrong.');
+            }
+          }
+        });
+      }
+    });  
+  })
+
 app.post('/login', function(request, response){
     var user = request.body;
   
@@ -40,7 +60,7 @@ app.use('/', express.static('examples'));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
-app.get('/getSurvey', function(request, response) {
+app.get('/mysurvey/rest/getSurvey', function(request, response) {
     db.collection('surveys').find().toArray((err, surveys) => {
         if (err) return console.log(err);
         response.setHeader('Content-Type', 'application/json');
@@ -48,7 +68,7 @@ app.get('/getSurvey', function(request, response) {
     })
 });
 
-app.post('/addSurvey', function(req, res){
+app.post('/mysurvey/rest/addSurvey', function(req, res){
     req.body._id = null;
     var survey = req.body;
     db.collection('surveys').insert(survey, function(err, data){
@@ -58,7 +78,7 @@ app.post('/addSurvey', function(req, res){
     })
 });
 
-app.put('/survey/:survey_id', function(req, res){    
+app.put('/mysurvey/rest/survey/:survey_id', function(req, res){    
     db.collection('surveys').findAndModify(
        {_id: new MongoId(req.params.survey_id)}, // query
        [['_id','asc']],  // sort order
@@ -73,11 +93,18 @@ app.put('/survey/:survey_id', function(req, res){
        });
 });
 
-app.delete('/survey/:survey_id', function(req, res){
+app.delete('/mysurvey/rest/survey/:survey_id', function(req, res){
     db.collection('surveys').remove({_id: new MongoId(req.params.survey_id)},
     function(err, data){
         res.json(data);
     });
+});
+
+app.post('/mysurvey/rest/addVote/:id', function(req, res){
+    db.surveys.update(
+        { _id: new MongoId(req.params.id) },
+        { $inc: { votes : 1 } }
+     )
 });
 
 MongoClient.connect('mongodb://localhost:27017/mysurvey', (err, database) => {

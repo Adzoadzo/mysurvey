@@ -1,10 +1,17 @@
 function SurveysController($http, $scope){
     console.log("Hello from surveys controller");
 
+    var config = {headers:  {
+        'Authorization': 'Basic d2VudHdvcnRobWFuOkNoYW5nZV9tZQ==',
+        'Accept': 'application/json;odata=verbose',
+        "JWT" : localStorage.getItem('user')
+        }
+      };
+
     refresh_surveys();
 
     function refresh_surveys(){
-        $http.get('/getSurvey').then(function(res){
+        $http.get('/mysurvey/rest/getSurvey', config).then(function(res){
             $scope.surveys_list = res.data;
         }),
         function(res){
@@ -35,7 +42,7 @@ function SurveysController($http, $scope){
     }
 
     $scope.add_survey = function() {
-        $http.post('/addSurvey', $scope.survey).then(function(data) {
+        $http.post('/mysurvey/rest/addSurvey', $scope.survey, config).then(function(data) {
             $scope.survey = null;
             $scope.surveys_list.push(data);
     
@@ -46,7 +53,7 @@ function SurveysController($http, $scope){
     }
 
     $scope.update_survey = function(){
-        $http.put('/survey/'+$scope.survey._id, $scope.survey).then(function(data){
+        $http.put('/mysurvey/rest/survey/'+$scope.survey._id, $scope.survey, config).then(function(data){
           refresh_surveys();
           //console.log($scope.car);
           toastr.info('You have successfully updated survey!');
@@ -55,9 +62,15 @@ function SurveysController($http, $scope){
     }
 
     $scope.delete_survey = function(survey_id){
-        $http.delete('/survey/'+ survey_id).then(function(data){
+        $http.delete('/mysurvey/rest/survey/'+ survey_id, config).then(function(data){
             refresh_surveys();
             toastr.success('Survey deleted');
+        });
+    }
+
+    $scope.add_vote = function(survey_id){
+        $http.put('/mysurvey/rest/addVote/'+survey_id, config).then(function(data){
+            console.log('updated');
         });
     }
 }
