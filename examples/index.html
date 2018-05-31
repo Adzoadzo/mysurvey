@@ -22,7 +22,12 @@
 </head>
 
 <body>
-    <div ng-include="'mysurvey.html'"></div>
+    <div ng-if="!check_login()">
+        <div ng-include="'login.html'"></div>
+    </div>
+    <div ng-if="check_login()">
+        <div ng-include="'mysurvey.html'"></div>
+    </div>
 </body>
 <script src="assets/js/angular.min.js"></script>
 <script src="assets/js/angular-route.js"></script>
