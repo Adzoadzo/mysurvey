@@ -6,9 +6,9 @@
                             {{survey.survey_question}}
                         </div>
                         <div class="panel-body">
-                            <p>{{survey.survey_answer1}}</p>
-                            <p>{{survey.survey_answer2}}</p>
-                            <p>{{survey.survey_answer3}}</p>
+                            <input type="checkbox" ng-model="vote.survey_answer1"> {{survey.survey_answer1}}<br>
+                            <input type="checkbox" ng-model="vote.survey_answer2"> {{survey.survey_answer2}}<br>
+                            <input type="checkbox" ng-model="vote.survey_answer3"> {{survey.survey_answer3}}<br>
                         </div>
                         <div class="panel-footer">
                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" ng-click="add_vote(survey._id)" data-target="#modal1">Vote</button>

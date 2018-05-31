@@ -1,5 +1,5 @@
 app.controller('sidebarCtrl', function($scope, $location, $http){
-    
+
     $scope.check_login = function(){
         if(localStorage.getItem('user')){
             return true;
@@ -10,6 +10,7 @@ app.controller('sidebarCtrl', function($scope, $location, $http){
     $scope.login = function(credentials){
         $http.post('/login', credentials).then(function(response){
             localStorage.setItem('user',response.data.token)
+            toastr.success('Logged in successfully');
         }),function(error){
             console.log(error);
         }

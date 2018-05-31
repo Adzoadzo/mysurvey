@@ -1,4 +1,4 @@
-function SurveysController($http, $scope){
+function SurveysController($http, $scope, toastr){
     console.log("Hello from surveys controller");
 
     var config = {headers:  {
@@ -47,15 +47,13 @@ function SurveysController($http, $scope){
             $scope.surveys_list.push(data);
     
             refresh_surveys();
-            //toastr.success('Car added successfully!');
-            //refresh_surveys();
+            toastr.success('Survey added successfully!');
         });
     }
 
     $scope.update_survey = function(){
         $http.put('/mysurvey/rest/survey/'+$scope.survey._id, $scope.survey, config).then(function(data){
           refresh_surveys();
-          //console.log($scope.car);
           toastr.info('You have successfully updated survey!');
           $scope.survey = null;
         });
@@ -69,7 +67,7 @@ function SurveysController($http, $scope){
     }
 
     $scope.add_vote = function(survey_id){
-        $http.put('/mysurvey/rest/addVote/'+survey_id, config).then(function(data){
+        $http.put('/addVote/'+survey_id).then(function(data){
             console.log('updated');
         });
     }

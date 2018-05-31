@@ -100,10 +100,10 @@ app.delete('/mysurvey/rest/survey/:survey_id', function(req, res){
     });
 });
 
-app.post('/mysurvey/rest/addVote/:id', function(req, res){
-    db.surveys.update(
+app.put('/addVote/:id', function(req, res){
+    db.collection('surveys').update(
         { _id: new MongoId(req.params.id) },
-        { $inc: { votes : 1 } }
+        { $inc: { "survey_answer1.votes" : 1 } }
      )
 });
 
