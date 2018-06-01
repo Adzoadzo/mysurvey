@@ -16,6 +16,16 @@ app.controller('sidebarCtrl', function($scope, $location, $http){
         }
     }
 
+    $scope.registration = function() {
+        $http.post('/mysurvey/rest/addUser', $scope.user, config).then(function(data) {
+            $scope.user = null;
+            $scope.users_list.push(data);
+    
+            refresh_users();
+            toastr.success('Registration succesfull!');
+        });
+    }
+
     $scope.logout = function(){
         localStorage.clear();
     }

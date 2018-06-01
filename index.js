@@ -107,6 +107,16 @@ app.put('/addVote/:id', function(req, res){
      )
 });
 
+app.post('/mysurvey/rest/addUser', function(req, res){
+  req.body._id = null;
+  var user = req.body;
+  db.collection('users').insert(user, function(err, data){
+      if(err) return console.log(err);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(user);
+  })
+});
+
 MongoClient.connect('mongodb://localhost:27017/mysurvey', (err, database) => {
   if (err) return console.log(err)
   db = database

@@ -1,8 +1,8 @@
 <div class="surveys">
     <div class="row">
             <div ng-repeat="survey in surveys_list" class="col-lg-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
+                    <div  style= "border-color: #9dc54a" class="panel panel-primary">
+                        <div style="background-color: #9dc54a; border-color: #9dc54a" class="panel-heading">
                             {{survey.survey_question}}
                         </div>
                         <div class="panel-body">
@@ -11,7 +11,7 @@
                             <input type="checkbox" ng-model="vote.survey_answer3"> {{survey.survey_answer3}}<br>
                         </div>
                         <div class="panel-footer">
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" ng-click="add_vote(survey._id)" data-target="#modal1">Vote</button>
+                            <button type="button" style= "background-color: #06c0d3; box-shadow: #06c0d3" class="btn btn-primary btn-xs" data-toggle="modal" ng-click="add_vote(survey._id)" data-target="#modal1">Vote</button>
                         </div>
                     </div>
         </div>
