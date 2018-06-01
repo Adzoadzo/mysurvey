@@ -71,4 +71,4 @@ function SurveysController($http, $scope, toastr){
             console.log('updated');
         });
     }
-}
+}   
