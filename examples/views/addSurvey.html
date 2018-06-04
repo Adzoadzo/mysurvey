@@ -1,54 +1,48 @@
 <div class="row">
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header card-chart" data-background-color="green">
+                        <div class="card">
                               
-                              <h3>Add survey simple and easy.</h3>
-                              <h3>Fill in all fields and you finished.</h3>
-                              <p class="category">Please fill all fields</p>
-                              
-                        <div class="ct-chart" id="dailySalesChart"></div>
-                    </div>
-                    <div class="card-content">
-                        <h4 class="title">Add survey</h4>
-                        <p class="category">
-                            
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i</i> Simple
+                            <div class="card-header card-chart" style="background-color:#9dc54a">
+                                <div class="ct-chart" id="emailsSubscriptionChart"></div>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="title">Add survey</h4>
+                                
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i></i>  Fill all fields and add survey
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header card-chart" data-background-color="orange">
+                    <div class="card-header card-chart" data-background-color="green">
                         <div class="ct-chart" id="emailsSubscriptionChart"></div>
                     </div>
                     <div class="card-content">
                         <h4 class="title">Check survey</h4>
-                        <p class="category">Last Campaign Performance</p>
+                        
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                    <i></i>  You can check your survey
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header card-chart" data-background-color="red">
+                    <div class="card-header card-chart" style="background-color:#06c0d3">
                         <div class="ct-chart" id="completedTasksChart"></div>
                     </div>
                     <div class="card-content">
                         <h4 class="title">Edit or Delete survey</h4>
-                        <p class="category">Last Campaign Performance</p>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                    <i></i>  You can Edit or delete your survey
                         </div>
                     </div>
                 </div>
@@ -129,8 +123,8 @@
                                                                   <td>{{survey.survey_category}}</td>
                                                                   <td>
                                                                      <div class="btn-group">
-                                                                        <button class="btn btn-warning" ng-click="edit_survey(survey)">Edit</button>
-                                                                        <button class="btn btn-danger" ng-click="delete_survey(survey._id)">Delete</button>
+                                                                        <button class="btn btn-warning" style= "background-color:#9dc54a" ng-click="edit_survey(survey)">Edit</button>
+                                                                        <button class="btn btn-danger" style= "background-color:#06c0d3 " ng-click="delete_survey(survey._id)">Delete</button>
                                                                      </div>
                                                                   </td>
                                                                </tr>
