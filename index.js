@@ -100,13 +100,21 @@ app.delete('/mysurvey/rest/survey/:survey_id', function(req, res){
     });
 });
 
-app.put('/addVote/:id', function(req, res){
-    db.collection('surveys').update(
-        { _id: new MongoId(req.params.id) },
-        { $inc: { "survey_answer1.votes" : 1 } }
-     )
+app.put('/mysurvey/addVote/:id', function(req, res){
+  db.collection('surveys').update(
+      { _id: new MongoId(req.params.id) },
+      { $inc: { "vote" : 1 } }, function(err, data){
+        if(err){
+          console.log(err);
+        }else{
+          res.send({
+            success : true,
+            message : "voted"
+          })
+        }
+      }
+   )
 });
-
 app.post('/mysurvey/rest/addUser', function(req, res){
   req.body._id = null;
   var user = req.body;

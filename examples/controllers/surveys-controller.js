@@ -67,8 +67,8 @@ function SurveysController($http, $scope, toastr){
     }
 
     $scope.add_vote = function(survey_id){
-        $http.put('/addVote/'+survey_id).then(function(data){
-            console.log('updated');
+        $http.put('/mysurvey/addVote/'+survey_id, config).then(function(data){
+            toastr.success('Voted');
         });
     }
-}   
+    }
