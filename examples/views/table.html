@@ -4,7 +4,7 @@
                                 <div class="card">
                                     <div class="card-header" style="background-color: #9dc54a">
                                         <h4 class="title">Statistics</h4>
-                                        <p class="category">Providers</p>
+                                        <p class="category">Check votes on a survey</p>
                                     </div>
                                     <div class="card-content table-responsive">
                                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -12,18 +12,12 @@
                                                         <tr>
                                                             <th>Survey</th>
                                                             <th>Votes</th>
-                                                            <th>Best answer votes</th>
-                                                            <th>Total votes</th>
-                                                            <th>User</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr ng-repeat="survey in surveys_list" class="odd gradeX">
                                                                 <th>{{survey.survey_question}}</th>
                                                                 <th>{{survey.vote}}</th>
-                                                                <th>Best answer votes</th>
-                                                                <th>Total votes</th>
-                                                                <th>User</th>
                                                         </tr>
                                                         
                                                         
